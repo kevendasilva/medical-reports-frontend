@@ -1,11 +1,16 @@
 const express = require('express');
 const axios = require('axios');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
 const app = express();
-const PORT = 9999;
+const PORT = process.env.PORT || 9999; 
+const API_URL = process.env.API_URL || 'http://localhost:9997/laudos';
 
 app.get('/', async (req, res) => {
     try {
-        const response = await axios.get('http://localhost:9997/laudos');
+        const response = await axios.get(API_URL);
         const data = response.data;
 
         res.send(`
